@@ -1,7 +1,8 @@
+from datetime import datetime, date, timedelta
 import numpy
 import json
 import time
 
-x = ['baiyang','chenlingling']
-for i in range(5):
-    print(x)
+
+yesterday = (date.today() + timedelta(days = -1)).strftime("%Y-%m-%d")
+print(yesterday)
