@@ -7,11 +7,11 @@
 
 import MySQLdb
 conn=MySQLdb.connect\
-    (host = 'rm-bp1ewtt415rb50614ko.mysql.rds.aliyuncs.com',
+    (host = '*.aliyuncs.com',
                      port = 3306,
-                     user = 'wdt',
-                     passwd = 'bU6jPopzhcPfSUvR',
-                     database = 'double_11',
+                     user = '',
+                     passwd = '',
+                     database = '',
                      charset = 'utf8')
 
 print('successfully connect')
