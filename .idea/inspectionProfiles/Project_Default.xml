@@ -6,6 +6,8 @@
         <list>
           <option value="httplib" />
           <option value="urllib2" />
+          <option value="email.MIMEMultipart" />
+          <option value="email.*" />
         </list>
       </option>
     </inspection_tool>
