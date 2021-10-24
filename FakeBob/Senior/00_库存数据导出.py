@@ -76,7 +76,6 @@ with_amount as 计提金额,
 diff_invalid_age as 剩余效期,
 effective_type as 效期类型 from dm.dm_t08_01_stock_final a 
 where ds = date_format(DATE_SUB(NOW(),INTERVAL 1 day),'%Y%m%d')
-limit 100
 """,con=conn)
 #####################################################################################################################################
 stockanalytics = pd.read_sql("""
@@ -91,13 +90,13 @@ stockanalytics.to_excel(page1,index = False)
 print("执行SQL结束时间：",datetime.datetime.now())
 #####################################################################################################################################
 # 压缩目录下面的文件
-def compress_attaches(files, out_name):
-    f = zipfile.ZipFile(out_name, 'w', zipfile.ZIP_DEFLATED)
-    for file in files:
-        f.write(file)
-    f.close()
-files = [page, page1]
-compress_attaches(files, zipfilepath)
+# def compress_attaches(files, out_name):
+#     f = zipfile.ZipFile(out_name, 'w', zipfile.ZIP_DEFLATED)
+#     for file in files:
+#         f.write(file)
+#     f.close()
+# files = [page, page1]
+# compress_attaches(files, zipfilepath)
 
 # zip_file = zipfile.ZipFile(zipfilepath, 'w',zipfile.ZIP_DEFLATED)
 # zip_file.write(page)
@@ -105,11 +104,12 @@ compress_attaches(files, zipfilepath)
 #####################################################################################################################################
 #邮件附件内容
 From = "bi-report@ilarge.cn"
-To = "baiyang@ilarge.cn"
-file_name = zipfilepath  #附件名
+# To = "baiyang@ilarge.cn;wangzizi@ilarge.cn;xuyang@ilarge.cn"
+To = "baiyang@ilarge.cn;wangzizi@ilarge.cn;xiaoyang@ilarge.cn;zhangyu@ilarge.cn;yudongxue@ilarge.cn luxiao@ilarge.cn;anna@ilarge.cn;wuyu@ilarge.cn;huxiaoxue@ilarge.cn;mijun@ilarge.cn"
+file_name = page1  #附件名
 
 server = smtplib.SMTP_SSL("smtp.exmail.qq.com",465)
-server.login("bi-report@ilarge.cn","f4ND674F9jGnGLhC") #仅smtp服务器需要验证时
+server.login("bi-report@ilarge.cn","fScWtz7JjR7SoX5g") #仅smtp服务器需要验证时
 
 # 构造MIMEMultipart对象做为根容器
 main_msg = MIMEMultipart()
@@ -143,3 +143,4 @@ try:
     server.sendmail(From, To, fullText)
 finally:
     server.quit()
+print("邮件发送成功！")
