@@ -76,6 +76,7 @@ with_amount as 计提金额,
 diff_invalid_age as 剩余效期,
 effective_type as 效期类型 from dm.dm_t08_01_stock_final a 
 where ds = date_format(DATE_SUB(NOW(),INTERVAL 1 day),'%Y%m%d')
+limit 100
 """,con=conn)
 #####################################################################################################################################
 stockanalytics = pd.read_sql("""
@@ -105,7 +106,7 @@ print("执行SQL结束时间：",datetime.datetime.now())
 #邮件附件内容
 From = "bi-report@ilarge.cn"
 # To = "baiyang@ilarge.cn;wangzizi@ilarge.cn;xuyang@ilarge.cn"
-To = "baiyang@ilarge.cn;wangzizi@ilarge.cn;xiaoyang@ilarge.cn;zhangyu@ilarge.cn;yudongxue@ilarge.cn luxiao@ilarge.cn;anna@ilarge.cn;wuyu@ilarge.cn;huxiaoxue@ilarge.cn;mijun@ilarge.cn"
+To = "baiyang@ilarge.cn,wangzizi@ilarge.cn,xiaoyang@ilarge.cn,zhangyu@ilarge.cn,yudongxue@ilarge.cn,luxiao@ilarge.cn,anna@ilarge.cn,wuyu@ilarge.cn,huxiaoxue@ilarge.cn,mijun@ilarge.cn"
 file_name = page1  #附件名
 
 server = smtplib.SMTP_SSL("smtp.exmail.qq.com",465)
@@ -140,7 +141,7 @@ fullText = main_msg.as_string( )
 
 # 用smtp发送邮件
 try:
-    server.sendmail(From, To, fullText)
+    server.sendmail(From, To.split(','), fullText)
 finally:
     server.quit()
 print("邮件发送成功！")
