@@ -107,18 +107,17 @@ print("执行SQL结束时间：",datetime.datetime.now())
 From = "bi-report@ilarge.cn"
 # To = "baiyang@ilarge.cn;wangzizi@ilarge.cn;xuyang@ilarge.cn"
 To = "baiyang@ilarge.cn,wangzizi@ilarge.cn,xiaoyang@ilarge.cn,zhangyu@ilarge.cn,yudongxue@ilarge.cn,luxiao@ilarge.cn,anna@ilarge.cn,wuyu@ilarge.cn,huxiaoxue@ilarge.cn,mijun@ilarge.cn"
-file_name = page1  #附件名
-
+#附件名
+file_name = page1
+#####################################################################################################################################
 server = smtplib.SMTP_SSL("smtp.exmail.qq.com",465)
 server.login("bi-report@ilarge.cn","fScWtz7JjR7SoX5g") #仅smtp服务器需要验证时
-
+#####################################################################################################################################
 # 构造MIMEMultipart对象做为根容器
 main_msg = MIMEMultipart()
-
 # 构造MIMEText对象做为邮件显示内容并附加到根容器
 text_msg = MIMEText("Dear all：\n \n  附件为截止{}库存明细数据及库存分析报告,请查收!\n \n  另事业部缺失信息，已在KATA系统中更新，还请及时维护，谢谢！\n \n  维护地址：https://bi.ikunchi.com/decision".format(localtime)) #邮件正文内容
 main_msg.attach(text_msg)
-
 # 构造MIMEBase对象做为文件附件内容并附加到根容器
 ctype,encoding = mimetypes.guess_type(file_name)
 if ctype is None or encoding is not None:
@@ -130,15 +129,15 @@ print(ctype,encoding)
 basename = os.path.basename(file_name)
 file_msg.add_header('Content-Disposition','attachment', filename = basename)#修改邮件头
 main_msg.attach(file_msg)
-
+#####################################################################################################################################
 # 设置根容器属性
 main_msg['From'] = From
 main_msg['To'] = To
 main_msg['Subject'] = filename
-
+#####################################################################################################################################
 # 得到格式化后的完整文本
 fullText = main_msg.as_string( )
-
+#####################################################################################################################################
 # 用smtp发送邮件
 try:
     server.sendmail(From, To.split(','), fullText)
