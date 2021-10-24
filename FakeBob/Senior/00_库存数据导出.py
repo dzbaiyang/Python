@@ -76,6 +76,7 @@ with_amount as 计提金额,
 diff_invalid_age as 剩余效期,
 effective_type as 效期类型 from dm.dm_t08_01_stock_final a 
 where ds = date_format(DATE_SUB(NOW(),INTERVAL 1 day),'%Y%m%d')
+limit 100
 """,con=conn)
 #####################################################################################################################################
 stockanalytics = pd.read_sql("""
