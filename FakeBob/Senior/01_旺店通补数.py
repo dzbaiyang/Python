@@ -2,8 +2,8 @@ import requests
 from datetime import datetime, timedelta
 import time
 if __name__ == '__main__':
-    start = datetime(2021, 4, 1)
-    end = datetime(2021, 9, 25)
+    start = datetime(2021, 8, 1)
+    end = datetime(2021, 8, 1)
     current = start
     while current <= end:
         date_str = current.strftime('%Y-%m-%d')
